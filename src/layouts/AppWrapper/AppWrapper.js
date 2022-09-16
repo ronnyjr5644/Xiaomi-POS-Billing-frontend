@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import React from 'react';
+import Header from '../Header/Header';
 import styles from './layout/AppWrapper.styles.default';
 
 const useStyles = makeStyles(styles);
@@ -10,7 +10,11 @@ const AppWrapper = ({
     const classes = useStyles();
 
     return (
-        <div className={classes.appwrapper_container}>{children}</div>
+        <div className={classes.appwrapper_container}>
+            <Header  />
+            {children}
+
+        </div>
     );
 };
 

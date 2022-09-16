@@ -3,7 +3,7 @@ const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     images: {
-        domains: [],
+        domains: [ 'upload.wikimedia.org', 'appmifile.com' ],
     },
     webpack(config) {
         config.module.rules.push({

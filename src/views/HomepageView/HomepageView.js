@@ -1,7 +1,7 @@
 import ImgMediaCard from '@components/Card/CardType';
 import Dialog from '@components/Dialog/Dialog';
 import DocumentHeader from '@components/DocumentHeader/DocumentHeader';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { inventory } from 'assets/currentStore';
 import { useDispatch, useSelector } from 'react-redux';
 import modalAction from 'redux/actions/modal.action';
@@ -19,7 +19,7 @@ const HomepageView = () => {
             open: true,
         }));
     };
-    console.log('base_data => ', inventory.data.base_data);
+
     const handleSignUpModal = () => {
         reduxDispatch(modalAction.setModalObj({
             data: {
@@ -39,7 +39,6 @@ const HomepageView = () => {
         }));
     };
     const { modal } = useSelector((state) => state.modal);
-    console.log('mm', modal);
     return (
         <div style={{ margin: 'auto 20px' }}>
             <DocumentHeader
@@ -47,16 +46,28 @@ const HomepageView = () => {
                 description=""
             />
             <div style={{ marginTop: '50%' }}>
-                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                {
+                    inventory.data.base_data[ 0 ].children.map((item) => (
+                        <>
 
-                    {[ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ].map((index) => (
-                        <Grid item xs={2} sm={4} md={3} key={index}>
-                            <ImgMediaCard />
+                            <Typography>{item.name}</Typography>
+                            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                                {
+                                    item.children.map((product) => (
+                                        <Grid item xs={2} sm={4} md={3} key={product}>
+                                            <ImgMediaCard title={product.name} price={product.price} image={product.pic} />
+                                        </Grid>
+                                    ))
+                                }
+                            </Grid>
+                        </>
+                    ))
+                }
 
-                        </Grid>
-                    ))}
+                {/* {[ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ].map((index) => (
 
-                </Grid>
+                    ))} */}
+
             </div>
             <Dialog
                 title=""

@@ -27,8 +27,11 @@ const Checkout = () => {
     }, [ shippingState ]);
 
     return (
-        <>
-            <Typography variant="h6" gutterBottom>Shipping address</Typography>
+        <div style={{
+            padding: '20px', width: '50%', margin: 'auto auto', borderRadius: '10px',   boxShadow: '5px 10px 18px red',
+        }}
+        >
+            <Typography variant="h6" gutterBottom>Checkout Details</Typography>
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit((data) => test({
                     ...data,
@@ -82,7 +85,7 @@ const Checkout = () => {
                     </div>
                 </form>
             </FormProvider>
-        </>
+        </div>
     );
 };
 

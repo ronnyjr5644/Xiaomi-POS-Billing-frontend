@@ -40,12 +40,12 @@ const HomepageView = () => {
     };
     const { modal } = useSelector((state) => state.modal);
     return (
-        <div style={{ margin: 'auto 20px' }}>
+        <div style={{ margin: 'auto 20px', height: '100vh' }}>
             <DocumentHeader
                 title="Xiomi Billing - Landing Page"
                 description=""
             />
-            <div style={{ marginTop: '50%' }}>
+            <div style={{ marginTop: '8%' }}>
                 {
                     inventory.data.base_data[ 0 ].children.map((item) => (
                         <>

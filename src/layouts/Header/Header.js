@@ -34,12 +34,12 @@ export default function Header({ signIn = () => {} }) {
         setNavVisibility(!isNavVisible);
     };
     const  reduxDispatch  = useDispatch();
-    const handleSigninModal = () => {
+    const handleSigninModal = (type) => {
         reduxDispatch(modalAction.setModalObj({
             data: {
 
             },
-            type: 'SIGNIN', // SIGNIN SINGUP
+            type, // SIGNIN SINGUP
             open: true,
         }));
     };
@@ -67,9 +67,10 @@ export default function Header({ signIn = () => {} }) {
                 <nav className="Nav">
                     <Link href="/">Home</Link>
                     <Link href="/">Articles</Link>
-                    <Link href="/">About</Link>
+                    <Button style={{ height: '40px' }} onClick={() => handleSigninModal('CART')}>Cart</Button>
 
-                    <Button onClick={() => handleSigninModal()}>Login</Button>
+                    <Button style={{ height: '40px' }} onClick={() => handleSigninModal('SIGNIN')}>Login</Button>
+
                 </nav>
             </CSSTransition>
             <Button onClick={() => signIn()} className="Burger">

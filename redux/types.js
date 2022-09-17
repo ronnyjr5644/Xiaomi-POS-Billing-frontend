@@ -7,6 +7,11 @@ const types = {
         UPDATE_MODAL: 'UPDATE_MODAL',
         CLEAR_MODAL: 'CLEAR_MODAL',
     },
+    checkout: {
+        ADD_ITEM: 'ADD_ITEM',
+        REMOVE_ITEM: 'REMOVE_ITEM',
+        TOGGLE_MODAL: 'TOGGLE_MODAL',
+    },
 };
 
 export default types;

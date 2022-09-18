@@ -1,4 +1,5 @@
 import { makeStyles } from '@mui/styles';
+import { CookiesProvider } from 'react-cookie';
 import Header from '../Header/Header';
 import styles from './layout/AppWrapper.styles.default';
 
@@ -10,11 +11,13 @@ const AppWrapper = ({
     const classes = useStyles();
 
     return (
-        <div className={classes.appwrapper_container}>
-            <Header  />
-            {children}
+        <CookiesProvider>
+            <div className={classes.appwrapper_container}>
+                <Header  />
+                {children}
 
-        </div>
+            </div>
+        </CookiesProvider>
     );
 };
 

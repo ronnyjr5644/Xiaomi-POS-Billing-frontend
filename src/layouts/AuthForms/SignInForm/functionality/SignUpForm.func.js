@@ -1,9 +1,53 @@
+import { useSnackBarContext } from 'contexts/snackbar/SnackBarContext';
+import config from 'hooks/config.js/config';
+import useCustomAxiosCall from 'hooks/customAxiosHook';
 import useFormikFormHook from 'hooks/customFormikFormHook';
+import { useDispatch } from 'react-redux';
+import modalAction from 'redux/actions/modal.action';
 import * as Yup from 'yup';
 
-const useSignUpFormHook = () => {
-    const handleSignUpSubmitHandler = (values) => {
+const useSignUpFormHook = ({ handleSignIn }) => {
+    const { callApi } = useCustomAxiosCall();
+    const reduxDispatch = useDispatch();
+    const handleSigninModal = (type) => {
+        reduxDispatch(modalAction.setModalObj({
+            data: {
+
+            },
+            type: 'SIGNIN', // SIGNIN SINGUP
+            open: true,
+        }));
+    };
+    const { showSnackBar } = useSnackBarContext();
+    console.log('=>', showSnackBar);
+    const handleSignUpSubmitHandler = async (values) => {
+        console.log('hit');
         console.log(values);
+        const response = await callApi({
+            uriEndPoint: {
+                uri: `${ config.API_BASE_URL }/signup`,
+                method: 'POST',
+            },
+            body: {
+                MI_ID: values?.email,
+                Password: values?.password,
+                operator_name: values?.name,
+
+            },
+
+        });
+        if (response.status === 200) {
+            showSnackBar({
+                message: response?.data?.message || 'Successfully Registered',
+                open: true,
+                type: 'success',
+
+            });
+            console.log('response', response.data.message);
+            setTimeout(() => {
+                handleSigninModal();
+            }, 3000);
+        }
     };
 
     const fieldTypes = [

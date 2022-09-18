@@ -9,7 +9,7 @@ const useStyles = makeStyles(styles);
 
 const SignUpForm = ({ handleSignIn }) => {
     const classes = useStyles();
-    const { fieldTypes, formikProps, handleSignUp } = useSignUpFormHook();
+    const { fieldTypes, formikProps, handleSignUp } = useSignUpFormHook(handleSignIn);
     return (
         <div>
             <div className={classes.signinview_topheader}>

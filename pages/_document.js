@@ -1,15 +1,17 @@
-import * as React from 'react';
-import Document, {
-    Html, Main, Head, NextScript,
-} from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
+import Document, {
+    Head, Html, Main, NextScript
+} from 'next/document';
+import * as React from 'react';
 import createEmotionCache from '../utility/createEmotionCache';
 
 export default class MyDocument extends Document {
     render() {
         return (
             <Html lang="en">
-                <Head />
+                <Head>
+                    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+                </Head>
                 <body>
                     <Main />
                     <NextScript />

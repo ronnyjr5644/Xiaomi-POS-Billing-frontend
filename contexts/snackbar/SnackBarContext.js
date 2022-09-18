@@ -1,11 +1,11 @@
-import { createContext, useContext } from 'react';
-import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import { makeStyles } from '@mui/styles';
-import { useSelector, useDispatch } from 'react-redux';
-import styles from './layout/SnackBarcontext.style.default';
-import snackbarSelector from '../../redux/selectors/snackbar.selector';
+import { createContext, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SnackbarActions from '../../redux/actions/snackbar.actions';
+import snackbarSelector from '../../redux/selectors/snackbar.selector';
+import styles from './layout/SnackBarcontext.style.default';
 
 const SnackBarContext = createContext(null);
 const useStyles = makeStyles(styles);
@@ -47,7 +47,7 @@ const SnackBarProvider = ({ children }) => {
     return (
         <SnackBarContext.Provider value={value}>
             {children}
-            <Snackbar open={snackBarObj?.open} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar open={snackBarObj?.open} autoHideDuration={4000} onClose={handleClose}>
                 <MuiAlert
                     className={classes.snackbarText}
                     onClose={handleClose}

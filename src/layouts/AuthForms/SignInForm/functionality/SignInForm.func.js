@@ -1,11 +1,42 @@
+import { useSnackBarContext } from 'contexts/snackbar/SnackBarContext';
+import config from 'hooks/config.js/config';
+import useCustomAxiosCall from 'hooks/customAxiosHook';
 import useFormikFormHook from 'hooks/customFormikFormHook';
+import { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import * as Yup from 'yup';
 
 const useSignInFormHook = () => {
-    const handleSignInSubmitHandler = (values) => {
-        console.log(values);
-    };
+    const { callApi } = useCustomAxiosCall();
+    const { showSnackBar } = useSnackBarContext();
+    const [ cookies, setCookie ] = useCookies([ 'user' ]);
+    const handleSignInSubmitHandler = async (values) => {
+        const response = await callApi({
+            uriEndPoint: {
+                uri: `${ config.API_BASE_URL }/signin`,
+                method: 'POST',
+            },
+            body: {
+                MI_ID: values?.email,
+                Password: values?.password,
 
+            },
+
+        });
+        if (response.status === 200) {
+            showSnackBar({
+                message: response?.data?.message || 'Logged in',
+                open: true,
+                type: 'success',
+
+            });
+            setCookie('user', response.data.token);
+            console.log('response', response.data.token);
+        }
+    };
+    useEffect(() => {
+        console.log('cookies', cookies);
+    }, [ cookies ]);
     const fieldTypes = [
         {
             name: 'email',

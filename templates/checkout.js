@@ -1,6 +1,51 @@
 /* eslint-disable no-tabs */
 // eslint-disable-next-line import/prefer-default-export
-export const templateCreator = (decodedString) => `
+export const templateCreator = (
+    firstName, lastName, address, mail, state, city, store, products,
+) => {
+    console.log('===> ', firstName, lastName, address, mail, state, city, store, products);
+    const mapper = () => products?.map((item) => `<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+<tbody>
+<tr>
+<td>
+<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 680px;" width="680">
+<tbody>
+<tr>
+<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="16.666666666666668%">
+<table border="0" cellpadding="0" cellspacing="0" class="image_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+<tr>
+<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;padding-top:5px;padding-bottom:5px;">
+<div align="center" class="alignment" style="line-height:10px"><img alt="cherries" src=${ item.pic } style="display: block; height: auto; border: 0; width: 55px; max-width: 100%;" title="cherries" width="55"/></div>
+</td>
+</tr>
+</table>
+</td>
+<td class="column column-2" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="16.666666666666668%">
+<table border="0" cellpadding="0" cellspacing="0" class="heading_block block-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+<tr>
+<td class="pad" style="text-align:center;width:100%;padding-top:30px;padding-bottom:5px;">
+<h1 style="margin: 0; color: #000000; direction: ltr; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; font-size: 16px; font-weight: normal; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><strong>${ item.title }</strong></h1>
+</td>
+</tr>
+</table>
+</td>
+<td class="column column-3" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="16.666666666666668%">
+<table border="0" cellpadding="0" cellspacing="0" class="text_block block-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+<tr>
+<td class="pad" style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:30px;">
+<div style="font-family: Tahoma, Verdana, sans-serif">
+<div class="" style="font-size: 14px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 16.8px; color: #60bb44; line-height: 1.2;">
+<p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;"><span style="font-size:16px;"><strong>${ item.price }</strong></span></p>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tbody>
+</table>
+`);
+    return `
 <!DOCTYPE html>
 
 <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
@@ -124,7 +169,7 @@ export const templateCreator = (decodedString) => `
 <td class="pad">
 <div style="font-family: Tahoma, Verdana, sans-serif">
 <div class="" style="font-size: 14px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 16.8px; color: #000000; line-height: 1.2;">
-<p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;"><span style="font-size:16px;"><strong>Thanks for shopping with XIAOMI</strong></span></p>
+<p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;"><span style="font-size:16px;"><strong>${ firstName }, Thanks for shopping with XIAOMI</strong></span></p>
 </div>
 </div>
 </td>
@@ -155,73 +200,8 @@ export const templateCreator = (decodedString) => `
 </tr>
 </tbody>
 </table>
-<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-<tbody>
-<tr>
-<td>
-<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 680px;" width="680">
-<tbody>
-<tr>
-<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="16.666666666666668%">
-<table border="0" cellpadding="0" cellspacing="0" class="image_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-<tr>
-<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;padding-top:5px;padding-bottom:5px;">
-<div align="center" class="alignment" style="line-height:10px"><img alt="cherries" src="images/organic_cheeries.png" style="display: block; height: auto; border: 0; width: 55px; max-width: 100%;" title="cherries" width="55"/></div>
-</td>
-</tr>
-</table>
-</td>
-<td class="column column-2" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="16.666666666666668%">
-<table border="0" cellpadding="0" cellspacing="0" class="heading_block block-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-<tr>
-<td class="pad" style="text-align:center;width:100%;padding-top:30px;padding-bottom:5px;">
-<h1 style="margin: 0; color: #000000; direction: ltr; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; font-size: 16px; font-weight: normal; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><strong>Vegan cherries</strong></h1>
-</td>
-</tr>
-</table>
-</td>
-<td class="column column-3" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="16.666666666666668%">
-<table border="0" cellpadding="0" cellspacing="0" class="text_block block-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
-<tr>
-<td class="pad" style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:30px;">
-<div style="font-family: Tahoma, Verdana, sans-serif">
-<div class="" style="font-size: 14px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 16.8px; color: #60bb44; line-height: 1.2;">
-<p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;"><span style="font-size:16px;"><strong>$21.00</strong></span></p>
-</div>
-</div>
-</td>
-</tr>
-</table>
-</td>
-<td class="column column-4" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="33.333333333333336%">
-<table border="0" cellpadding="0" cellspacing="0" class="text_block block-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
-<tr>
-<td class="pad" style="padding-left:10px;padding-right:10px;padding-top:30px;padding-bottom:5px;">
-<div style="font-family: Tahoma, Verdana, sans-serif">
-<div class="" style="font-size: 14px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 16.8px; color: #000000; line-height: 1.2;">
-<p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px; letter-spacing: normal;"><span style="font-size:16px;"><strong>   <span style="background-color:#60bb44;"> </span><span style="background-color:#60bb44;font-size:16px;"><span style="color:#ffffff;">02</span></span><span style="color:#ffffff;"><span style="background-color:#60bb44;"> </span>  </span></strong></span></p>
-</div>
-</div>
-</td>
-</tr>
-</table>
-</td>
-<td class="column column-5" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="16.666666666666668%">
-<table border="0" cellpadding="0" cellspacing="0" class="heading_block block-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-<tr>
-<td class="pad" style="text-align:center;width:100%;padding-top:30px;padding-bottom:5px;">
-<h1 style="margin: 0; color: #000000; direction: ltr; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 16px; font-weight: normal; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><strong>$42.00</strong></h1>
-</td>
-</tr>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
+
+${ mapper() }
 <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-5" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
 <tbody>
 <tr>
@@ -251,7 +231,7 @@ export const templateCreator = (decodedString) => `
 <tr>
 <td class="pad" style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:30px;text-align:center;">
 <div align="center" class="alignment">
-<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="www.example.com" style="height:44px;width:186px;v-text-anchor:middle;" arcsize="46%" strokeweight="0.75pt" strokecolor="#60BB44" fillcolor="#60bb44"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Tahoma, Verdana, sans-serif; font-size:16px"><![endif]--><a href="www.example.com" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#60bb44;border-radius:20px;width:auto;border-top:1px solid #60BB44;font-weight:400;border-right:1px solid #60BB44;border-bottom:1px solid #60BB44;border-left:1px solid #60BB44;padding-top:5px;padding-bottom:5px;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="word-break: break-word;"><span data-mce-style="" dir="ltr" style=""><strong><span data-mce-style="" dir="ltr" style="line-height: 32px;">FINISH CHECKOUT</span></strong></span></span></span></a>
+<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="www.example.com" style="height:44px;width:186px;v-text-anchor:middle;" arcsize="46%" strokeweight="0.75pt" strokecolor="#60BB44" fillcolor="#60bb44"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Tahoma, Verdana, sans-serif; font-size:16px"><![endif]--><a href="www.example.com" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#60bb44;border-radius:20px;width:auto;border-top:1px solid #60BB44;font-weight:400;border-right:1px solid #60BB44;border-bottom:1px solid #60BB44;border-left:1px solid #60BB44;padding-top:5px;padding-bottom:5px;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="word-break: break-word;"><span data-mce-style="" dir="ltr" style=""><strong><span data-mce-style="" dir="ltr" style="line-height: 32px;">THANK YOU</span></strong></span></span></span></a>
 <!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
 </div>
 </td>
@@ -261,9 +241,7 @@ export const templateCreator = (decodedString) => `
 <tr>
 <td class="pad" style="padding-bottom:30px;padding-left:20px;padding-right:20px;padding-top:60px;">
 <div style="font-family: Tahoma, Verdana, sans-serif">
-<div class="" style="font-size: 14px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 16.8px; color: #000000; line-height: 1.2;">
-<p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;"><span style="font-size:30px;"><strong><span style="">Featured products</span></strong></span></p>
-</div>
+
 </div>
 </td>
 </tr>
@@ -281,16 +259,7 @@ export const templateCreator = (decodedString) => `
 <tr>
 <td>
 <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 680px;" width="680">
-<tbody>
-<tr>
-<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
-<table border="0" cellpadding="0" cellspacing="0" class="image_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-<tr>
-<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;padding-top:40px;">
-<div align="center" class="alignment" style="line-height:10px"><img alt="grocery" class="big" src="images/grocery.png" style="display: block; height: auto; border: 0; width: 396px; max-width: 100%;" title="grocery" width="396"/></div>
-</td>
-</tr>
-</table>
+
 </td>
 </tr>
 </tbody>
@@ -377,12 +346,6 @@ export const templateCreator = (decodedString) => `
 <td class="pad" style="padding-bottom:30px;padding-left:10px;padding-right:10px;padding-top:10px;text-align:center;">
 <div class="alignment" style="text-align:center;">
 <table border="0" cellpadding="0" cellspacing="0" class="social-table" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block;" width="144px">
-<tr>
-<td style="padding:0 2px 0 2px;"><a href="https://www.facebook.com/" target="_blank"><img alt="Facebook" height="32" src="images/facebook2x.png" style="display: block; height: auto; border: 0;" title="facebook" width="32"/></a></td>
-<td style="padding:0 2px 0 2px;"><a href="https://www.twitter.com/" target="_blank"><img alt="Twitter" height="32" src="images/twitter2x.png" style="display: block; height: auto; border: 0;" title="twitter" width="32"/></a></td>
-<td style="padding:0 2px 0 2px;"><a href="https://www.linkedin.com/" target="_blank"><img alt="Linkedin" height="32" src="images/linkedin2x.png" style="display: block; height: auto; border: 0;" title="linkedin" width="32"/></a></td>
-<td style="padding:0 2px 0 2px;"><a href="https://www.instagram.com/" target="_blank"><img alt="Instagram" height="32" src="images/instagram2x.png" style="display: block; height: auto; border: 0;" title="instagram" width="32"/></a></td>
-</tr>
 </table>
 </div>
 </td>
@@ -430,10 +393,6 @@ export const templateCreator = (decodedString) => `
 
 <table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">
 
-<tr>
-<td style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 6px;"><a href="https://www.designedwithbee.com/" style="text-decoration: none;" target="_blank"><img align="center" alt="Designed with BEE" class="icon" height="32" src="images/bee.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="34"/></a></td>
-<td style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 15px; color: #9d9d9d; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="https://www.designedwithbee.com/" style="color: #9d9d9d; text-decoration: none;" target="_blank">Designed with BEE</a></td>
-</tr>
 </table>
 </td>
 </tr>
@@ -456,3 +415,4 @@ export const templateCreator = (decodedString) => `
 </body>
 </html>
 `;
+};

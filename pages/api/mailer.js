@@ -5,9 +5,9 @@ const nodemailer = require('nodemailer');
 
 export default async function handler(req, res) {
     const {
-        firstName, lastName, address, mail, state, city, store,
+        firstName, lastName, address, mail, state, city, store, products,
     } = req.body;
-    console.log('=> ', req.body);
+    // console.log('=> ', req.body);
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -36,8 +36,8 @@ export default async function handler(req, res) {
             address: process.env.SENDER_EMAIL || placeholder.SENDER_EMAIL,
         },
         to: mail,
-        subject: 'THANK YOU FOR SHOPIING WITH US',
-        html: templateCreator(),
+        subject: `${ firstName }, Thank You For Shopping With Us`,
+        html: templateCreator(firstName, lastName, address, mail, state, city, store, products),
     };
 
     await new Promise((resolve, reject) => {
@@ -46,11 +46,11 @@ export default async function handler(req, res) {
             if (err) {
                 console.error(err);
                 reject(err);
-                res.status(504).end(JSON.stringify({ message: 'Unsuccessfull' }));
+                res.status(504).end(JSON.stringify({ message: 'Unknown Error' }));
             } else {
                 console.log(info);
                 resolve(info);
-                res.status(200).end(JSON.stringify({ message: 'Successfully Registered' }));
+                res.status(200).end(JSON.stringify({ message: 'Successfully Checked Out' }));
             }
         });
     });

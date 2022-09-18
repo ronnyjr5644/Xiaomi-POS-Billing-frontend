@@ -1,20 +1,38 @@
 import {
-    Button, Grid, InputLabel, MenuItem, Select, Typography
+    Button, CircularProgress, Grid, InputLabel, MenuItem, Select, Typography
 } from '@mui/material';
 import { STATE } from 'assets/currentStore';
+import { useSnackBarContext } from 'contexts/snackbar/SnackBarContext';
 import useCustomAxiosCall from 'hooks/customAxiosHook';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import FormInput from './CustomTextField';
 
 const Checkout = () => {
-    const [ shippingState, setShippingState ] = useState('');
     const [ cities, setCities ] = useState();
-    const [ city, setCity ] = useState('');
     const [ checkoutData, setCheckoutData ] = useState({});
     const methods = useForm();
+    const { showSnackBar } = useSnackBarContext();
     const { callApi }  = useCustomAxiosCall();
+    const products = useSelector((state) => state.checkout.itemInCart);
+    const [ proList, setProList ] = useState([]);
+    const [ loading, setLoading ] = useState(false);
+    const router = useRouter();
+
+    useEffect(() => {
+        products?.map((item) => {
+            setProList([ ...proList, {
+                pic: item.pic,
+                title: item.title,
+                price: item.price,
+            } ]);
+        });
+    }, []);
     const handleSendMail = async () => {
+        setLoading(true);
+        console.log('=>> ', proList);
         const response = await callApi({
             uriEndPoint: {
                 uri: '/api/mailer',
@@ -22,9 +40,29 @@ const Checkout = () => {
             },
             body: {
                 ...checkoutData,
+                products: proList,
             },
 
         });
+        setLoading(false);
+        if (response.status === 200) {
+            showSnackBar({
+                message: response?.data?.message || 'Successfully Checked Out',
+                open: true,
+                type: 'success',
+
+            });
+            setTimeout(() => {
+                router.push('/');
+            }, 4000);
+        } else {
+            showSnackBar({
+                message: response?.data?.message || 'Error in checking out',
+                open: true,
+                type: 'success',
+
+            });
+        }
         console.log('=> ', response);
     };
     const fetchCities = async (state) => {
@@ -92,8 +130,15 @@ const Checkout = () => {
                     </Grid>
                     <br />
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Button variant="outlined" to="/cart">Back to Cart</Button>
-                        <Button type="submit" variant="contained" color="primary">Next</Button>
+                        <Button variant="outlined" to="/">Back to Cart</Button>
+                        {
+                            loading ? (
+                                <>
+                                    <CircularProgress />
+                                </>
+                            )
+                                : (<Button type="submit" variant="contained" color="primary">Next</Button>)
+                        }
                     </div>
                 </form>
             </FormProvider>

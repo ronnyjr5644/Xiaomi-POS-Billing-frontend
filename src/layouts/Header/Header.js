@@ -35,7 +35,7 @@ export default function Header({ signIn = () => {} }) {
 
                     <div className="logo">
 
-                        <a href="#home"><i className="fa fa-angellist" /> xiaomi</a>
+                        <a href="/"><i className="fa fa-angellist" /> xiaomi</a>
                     </div>
 
                     <ul id="menu">

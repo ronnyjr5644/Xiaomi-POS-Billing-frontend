@@ -4,6 +4,7 @@ import Dialog from '@components/Dialog/Dialog';
 import DocumentHeader from '@components/DocumentHeader/DocumentHeader';
 import { Divider, Grid, Typography } from '@mui/material';
 import { inventory } from 'assets/currentStore';
+import config from 'hooks/config.js/config';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -22,6 +23,7 @@ const HomepageView = () => {
         }
         return str;
     };
+    console.log('=>', config.API_BASE_URL);
     const router = useRouter();
     const handleSigninModal = () => {
         reduxDispatch(modalAction.setModalObj({

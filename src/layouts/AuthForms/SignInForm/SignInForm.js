@@ -1,5 +1,6 @@
 import Button from '@components/Button/Button';
 import Typography from '@components/Typography/Typography';
+import { CircularProgress } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import AuthFormWrapper from 'src/layouts/AuthFormWrapper/AuthFormWrapper';
 import useSignInFormHook from './functionality/SignInForm.func';
@@ -9,7 +10,9 @@ const useStyles = makeStyles(styles);
 
 const SignInForm = ({ handleSignUp }) => {
     const classes = useStyles();
-    const { fieldTypes, formikProps, handleSignIn } = useSignInFormHook();
+    const {
+        fieldTypes, formikProps, handleSignIn, loading,
+    } = useSignInFormHook();
     return (
         <div>
             <div className={classes.signinview_topheader}>
@@ -26,7 +29,11 @@ const SignInForm = ({ handleSignUp }) => {
                 />
 
                 <div className={classes.signinview_formsubmitbtnwrapper}>
-                    <Button onClick={handleSignIn} buttonType="primary-btn">Sign In</Button>
+                    {loading ? (
+                        <>
+                            <CircularProgress />
+                        </>
+                    ) : (<Button onClick={handleSignIn} buttonType="primary-btn">Sign In</Button>)}
                 </div>
             </form>
         </div>

@@ -2,25 +2,28 @@ import { useSnackBarContext } from 'contexts/snackbar/SnackBarContext';
 import config from 'hooks/config.js/config';
 import useCustomAxiosCall from 'hooks/customAxiosHook';
 import useFormikFormHook from 'hooks/customFormikFormHook';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import modalAction from 'redux/actions/modal.action';
 import * as Yup from 'yup';
 
-const useSignUpFormHook = ({ handleSignIn }) => {
+const useSignUpFormHook = () => {
     const { callApi } = useCustomAxiosCall();
     const reduxDispatch = useDispatch();
+    const [ loading, setLoading ] = useState(false);
     const handleSigninModal = (type) => {
         reduxDispatch(modalAction.setModalObj({
             data: {
 
             },
-            type: 'SIGNIN', // SIGNIN SINGUP
+            type, // SIGNIN SINGUP
             open: true,
         }));
     };
     const { showSnackBar } = useSnackBarContext();
     console.log('=>', showSnackBar);
     const handleSignUpSubmitHandler = async (values) => {
+        setLoading(true);
         console.log('hit');
         console.log(values);
         const response = await callApi({
@@ -37,6 +40,7 @@ const useSignUpFormHook = ({ handleSignIn }) => {
 
         });
         if (response.status === 200) {
+            setLoading(false);
             showSnackBar({
                 message: response?.data?.message || 'Successfully Registered',
                 open: true,
@@ -45,8 +49,18 @@ const useSignUpFormHook = ({ handleSignIn }) => {
             });
             console.log('response', response.data.message);
             setTimeout(() => {
-                handleSigninModal();
+                setLoading(false);
+
+                handleSigninModal('SIGNIN');
             }, 3000);
+        } else {
+            setLoading(false);
+            showSnackBar({
+                message: response?.data?.message || 'Attempt unsuccessful',
+                open: true,
+                type: 'error',
+
+            });
         }
     };
 
@@ -113,6 +127,8 @@ const useSignUpFormHook = ({ handleSignIn }) => {
         formikProps,
         handleSignUp: handleSubmit,
         fieldTypes,
+        loading,
+        handleSigninModal,
     };
 };
 

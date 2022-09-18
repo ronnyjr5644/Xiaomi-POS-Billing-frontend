@@ -2,7 +2,7 @@
 import Button from '@components/Button/Button';
 import Dialog from '@components/Dialog/Dialog';
 import DocumentHeader from '@components/DocumentHeader/DocumentHeader';
-import { Grid, Typography } from '@mui/material';
+import { Divider, Grid, Typography } from '@mui/material';
 import { inventory } from 'assets/currentStore';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -50,6 +50,7 @@ const HomepageView = () => {
             open: false,
         }));
     };
+    const convertNumber = (price = '') => price?.replace(/₹{1,}/g, '').replace(/,{1,}/g, '');
     const handleAddProduct = (product) => {
         reduxDispatch(CheckoutActions.addItem(product));
     };
@@ -61,16 +62,31 @@ const HomepageView = () => {
         if (products.length <= 0) {
             return <Typography>No Item Available</Typography>;
         }
-        const productsList  = products.map((item) => (
-            <>
-                <Typography key={item}>=&gt; {getEllipsisTxt(item.name, 15)}</Typography>
+        let total = 0;
 
-            </>
+        const productsList  = products.map((item) => {
+            total = Number(convertNumber(item.price)) + total;
+            return (
+                <>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Typography key={item}>✴ {getEllipsisTxt(item.name, 15)}</Typography>
+                        <Typography key={item}>=&gt; {convertNumber(item.price) }&nbsp;INR</Typography>
 
-        ));
+                    </div>
+
+                </>
+
+            );
+        });
         return (
             <>
                 { productsList }
+                <Divider />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Typography>=&gt; Total</Typography>
+                    <Typography>=&gt; {total }&nbsp;INR</Typography>
+
+                </div>
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
 
                     <Button onClick={() => router.push('/checkout')}>CHECKOUT</Button>

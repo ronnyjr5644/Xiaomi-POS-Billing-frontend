@@ -2,7 +2,8 @@ import { useSnackBarContext } from 'contexts/snackbar/SnackBarContext';
 import config from 'hooks/config.js/config';
 import useCustomAxiosCall from 'hooks/customAxiosHook';
 import useFormikFormHook from 'hooks/customFormikFormHook';
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import * as Yup from 'yup';
 
@@ -10,7 +11,11 @@ const useSignInFormHook = () => {
     const { callApi } = useCustomAxiosCall();
     const { showSnackBar } = useSnackBarContext();
     const [ cookies, setCookie ] = useCookies([ 'user' ]);
+    const [ loading, setLoading ] = useState(false);
+    const router = useRouter();
+
     const handleSignInSubmitHandler = async (values) => {
+        setLoading(true);
         const response = await callApi({
             uriEndPoint: {
                 uri: `${ config.API_BASE_URL }/signin`,
@@ -23,6 +28,7 @@ const useSignInFormHook = () => {
             },
 
         });
+        setLoading(false);
         if (response.status === 200) {
             showSnackBar({
                 message: response?.data?.message || 'Logged in',
@@ -31,7 +37,14 @@ const useSignInFormHook = () => {
 
             });
             setCookie('user', response.data.token);
-            console.log('response', response.data.token);
+            router.reload('/');
+        } else {
+            showSnackBar({
+                message: response?.data?.message || 'Attempt unsuccessful',
+                open: true,
+                type: 'error',
+
+            });
         }
     };
     useEffect(() => {
@@ -78,6 +91,7 @@ const useSignInFormHook = () => {
         formikProps,
         handleSignIn: handleSubmit,
         fieldTypes,
+        loading,
     };
 };
 

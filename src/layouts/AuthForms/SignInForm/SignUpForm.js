@@ -1,5 +1,6 @@
 import Button from '@components/Button/Button';
 import Typography from '@components/Typography/Typography';
+import { CircularProgress } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import AuthFormWrapper from 'src/layouts/AuthFormWrapper/AuthFormWrapper';
 import useSignUpFormHook from './functionality/SignUpForm.func';
@@ -9,7 +10,10 @@ const useStyles = makeStyles(styles);
 
 const SignUpForm = ({ handleSignIn }) => {
     const classes = useStyles();
-    const { fieldTypes, formikProps, handleSignUp } = useSignUpFormHook(handleSignIn);
+    const {
+        fieldTypes, formikProps, handleSignUp, loading,
+    } = useSignUpFormHook(handleSignIn);
+    console.log('loading', loading);
     return (
         <div>
             <div className={classes.signinview_topheader}>
@@ -26,7 +30,11 @@ const SignUpForm = ({ handleSignIn }) => {
                 />
 
                 <div className={classes.signinview_formsubmitbtnwrapper}>
-                    <Button onClick={handleSignUp} buttonType="primary-btn">Sign Up</Button>
+                    {loading ? (
+                        <>
+                            <CircularProgress />
+                        </>
+                    ) : (<Button onClick={handleSignUp} buttonType="primary-btn">Sign Up</Button>)}
                 </div>
             </form>
         </div>

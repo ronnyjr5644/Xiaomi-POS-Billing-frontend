@@ -15,7 +15,7 @@
     <img src="https://uilogos.co/img/logomark/lighting.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Xiaomi BE</h3>
+  <h3 align="center">Xiaomi FE</h3>
 
 A brief description of what this project does and who it's for
 

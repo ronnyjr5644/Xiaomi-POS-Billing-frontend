@@ -1,4 +1,4 @@
-# Xiaomi-POS-Billing-frontend
+# Xiaomi-POS-Billing-Frontend
 <div id="top"></div>
 <!-- 
 [![Contributors][contributors-shield]][contributors-url]
